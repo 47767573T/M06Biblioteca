@@ -1,3 +1,7 @@
+package DBObjects;
+
+import com.sun.istack.internal.NotNull;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -12,6 +16,7 @@ public class Libros implements Serializable{
 
     @Id
     @GeneratedValue
+    @NotNull
     private int id;
     //@Column (name = "titulo")
     private String titulo;

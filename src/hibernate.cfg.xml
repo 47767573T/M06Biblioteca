@@ -14,8 +14,8 @@
 
         <property name="hbm2ddl.auto">create</property>
 
-        <mapping class="Libros"/>
-        <mapping class="Socios"/>
-        <mapping class="Prestamo"/>
+        <mapping class="DBObjects.Libros"/>
+        <mapping class="DBObjects.Socios"/>
+        <mapping class="DBObjects.Prestamo"/>
     </session-factory>
 </hibernate-configuration>

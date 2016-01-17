@@ -1,3 +1,7 @@
+package DBObjects;
+
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -11,6 +15,7 @@ public class Socios implements Serializable{
 
     @Id
     @GeneratedValue
+    @NotNull
     private int id;
     //@Column (name = "nombre")
     String nombre;
@@ -24,6 +29,7 @@ public class Socios implements Serializable{
     int telefono;
 
 
+    //CONSTRUCTORES
     public Socios(String apellido, int edad, String direccion, int telefono) {
         this.apellido = apellido;
         this.edad = edad;

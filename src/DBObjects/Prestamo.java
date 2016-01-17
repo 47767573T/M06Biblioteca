@@ -1,3 +1,6 @@
+package DBObjects;
+
+import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +15,7 @@ public class Prestamo implements Serializable{
 
     @Id
     @GeneratedValue
+    @NotNull
     private int id;
 
     @OneToOne(targetEntity = Libros.class, fetch = FetchType.LAZY)

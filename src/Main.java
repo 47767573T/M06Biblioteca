@@ -1,12 +1,8 @@
-import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
+import DBControl.Acceso;
 import org.hibernate.Session;
 import org.hibernate.Query;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.metadata.ClassMetadata;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
-import sun.rmi.runtime.Log;
 
 import java.util.Map;
 
@@ -14,7 +10,9 @@ import java.util.Map;
  * Created by Moises on 14/01/2016.
  */
 public class Main {
-    private static final SessionFactory sessionFactory;
+
+    public static Acceso acceso;
+    /*private static final SessionFactory sessionFactory;
     private static final ServiceRegistry serviceRegistry;
 
     static {
@@ -31,24 +29,33 @@ public class Main {
 
     public static Session getSession() throws HibernateException {
         return sessionFactory.openSession();
-    }
+    }*/
 
     public static void main(final String[] args) throws Exception {
-        final Session session = getSession();
+
+
+        Configuration conf = new Configuration().configure();
+        acceso = new Acceso(conf);
+        Session session = acceso.getSession("Main");
+        ComprobarTablas(session);
+
+    }
+
+    public static void ComprobarTablas (Session session){
         try {
-            System.out.println("querying all the managed entities...");
+            System.out.println("buscando las entidades...");
             final Map metadataMap = session.getSessionFactory().getAllClassMetadata();
             for (Object key : metadataMap.keySet()) {
                 final ClassMetadata classMetadata = (ClassMetadata) metadataMap.get(key);
                 final String entityName = classMetadata.getEntityName();
-                //System.out.println(entityName);
                 final Query query = session.createQuery("from " + entityName);
-                System.out.println("ejecutando" +
+                System.out.println("\tejecutando" +
                         ": " + query.getQueryString());
                 for (Object o : query.list()) {
                     System.out.println("  " + o);
                 }
             }
+            System.out.println("...entidades encontradas en Base de datos");
         } finally {
             session.close();
         }
