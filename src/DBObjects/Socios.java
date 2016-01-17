@@ -30,7 +30,8 @@ public class Socios implements Serializable{
 
 
     //CONSTRUCTORES
-    public Socios(String apellido, int edad, String direccion, int telefono) {
+    public Socios(String nombre, String apellido, int edad, String direccion, int telefono) {
+        this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
         this.direccion = direccion;

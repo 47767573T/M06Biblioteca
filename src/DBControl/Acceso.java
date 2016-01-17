@@ -34,19 +34,21 @@ public class Acceso {
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
             System.out.println("...Configuracion correcta");
+            System.out.println("peticion de acceso a "+conf.getProperty("connection.url"));
         }catch (ExceptionInInitializerError ex){
             System.out.println("Error en DB.Acceso --> "+ex);
         }
     }
 
     public static Session getSession(String callClass) throws HibernateException {
-        System.out.println("peticion de acceso a "+conf.getProperty("connection.url")+" desde "+callClass);
+        System.out.println("peticion de acceso desde "+callClass);
         return sessionFactory.openSession();
 
     }
 
-    //Apagar la sesion
-    public static void apagar() {sessionFactory.close();}
+    public static void Apagar() {sessionFactory.close();}
+
+
 
     /*
         public static ServiceRegistry nuevaServiceRegistry() {
