@@ -22,9 +22,11 @@ public class Insertar{
         //Libro de prueba
         Libros libro1 = new Libros("tit1", 20, "ed1", 23, 1902);
         Libros libro2 = new Libros("tit2", 25, "ed2", 45, 2005);
+        Libros libro3 = new Libros("tit2", 10, "ed2", 45, 1999);
 
         session.save(libro1);
         session.save(libro2);
+        session.save(libro3);
         session.getTransaction().commit();
     }
 
