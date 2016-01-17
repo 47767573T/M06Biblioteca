@@ -33,6 +33,12 @@ public class Socios implements Serializable{
 
     public Socios(){}
 
+
+    //GETTERS & SETTERS
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id;}
+
     public String getNombre() {
         return nombre;
     }

@@ -25,7 +25,7 @@ public class Main {
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
         } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex+":ERROR creando session factory");
+            throw new ExceptionInInitializerError(ex);
         }
     }
 
@@ -41,9 +41,10 @@ public class Main {
             for (Object key : metadataMap.keySet()) {
                 final ClassMetadata classMetadata = (ClassMetadata) metadataMap.get(key);
                 final String entityName = classMetadata.getEntityName();
-                System.out.println(entityName);
+                //System.out.println(entityName);
                 final Query query = session.createQuery("from " + entityName);
-                System.out.println("executing: " + query.getQueryString());
+                System.out.println("ejecutando" +
+                        ": " + query.getQueryString());
                 for (Object o : query.list()) {
                     System.out.println("  " + o);
                 }

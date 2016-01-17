@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">
+      <!--  <property name="connection.url">
             jdbc:postgresql://192.168.1.134:5432/biblioteca
         </property>
 
@@ -17,7 +17,7 @@
         <property name="connection.password">
             moisesbiblio
         </property>
-        <!-- DB schema will be updated if needed -->
+
         <property name="hbm2ddl.auto">update</property>
     </session-factory>
 </hibernate-configuration>

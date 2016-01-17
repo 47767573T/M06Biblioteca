@@ -24,7 +24,7 @@ public class Libros implements Serializable{
     //@Column (name = "anoEdicion")
     private int anoEdicion;
 
-
+    //CONSTRUCTORES
     public Libros(String titulo, int unidades, String editorial, int paginas, int anoEdicion) {
         this.titulo = titulo;
         this.unidades = unidades;
@@ -36,8 +36,6 @@ public class Libros implements Serializable{
     public Libros(){}
 
     // GETTERS & SETTERS
-
-
     public int getId() {
         return id;
     }
