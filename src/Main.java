@@ -1,5 +1,6 @@
 import DBControl.Acceso;
 import DBObjects.Libros;
+import DBObjects.Socios;
 import org.hibernate.Session;
 import org.hibernate.Query;
 import org.hibernate.cfg.Configuration;
@@ -26,7 +27,7 @@ public class Main {
         Configuration conf = new Configuration().configure();
         acceso = new Acceso(conf);
         Session session = acceso.getSession("Main");
-        ComprobarTablas(session);
+        ComprobarTablas(session);       //De estaa forma comprobamos la conexxion y las tablas mediante consola
 
         //INSERTAR:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         DBControl.Insertar.nuevoLibro();
@@ -41,22 +42,39 @@ public class Main {
         List<Object> librosPorTitulo = DBControl.Consultar.libroPorTitulo("tit2");
         for (int i = 0; i < librosPorTitulo.size(); i++) {
             Libros libro = (Libros)librosPorTitulo.get(i);
-            System.out.println(libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
+            System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
         }
 
         List<Object> librosPorEditorial = DBControl.Consultar.libroPorEditorial("ed2");
         for (int i = 0; i < librosPorEditorial.size(); i++) {
             Libros libro = (Libros)librosPorEditorial.get(i);
-            System.out.println(libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
+            System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
         }
 
         List<Object> librosPorAnoEdicion = DBControl.Consultar.libroPorAnoEdicion(2005);
         for (int i = 0; i < librosPorAnoEdicion.size(); i++) {
             Libros libro = (Libros)librosPorAnoEdicion.get(i);
-            System.out.println(libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
+            System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
         }
 
+
+
+
         //Socios.................................................................................
+
+        List<Object> sociosPorNombre= DBControl.Consultar.socioPorNombre("nom2");
+        for (int i = 0; i < librosPorAnoEdicion.size(); i++) {
+            Socios socio = (Socios)sociosPorNombre.get(i);
+            System.out.println("\t"+socio.getNombre()+" "+socio.getApellido()+" ("+socio.getEdad()+") con tlf "
+                +socio.getTelefono()+" y domicilio en "+socio.getDireccion());
+        }
+
+        List<Object> sociosPorApellido= DBControl.Consultar.socioPorApellido("cognom2");
+        for (int i = 0; i < sociosPorApellido.size(); i++) {
+            Socios socio = (Socios)sociosPorApellido.get(i);
+            System.out.println("\t"+socio.getNombre()+" "+socio.getApellido()+" ("+socio.getEdad()+") con tlf "
+                    +socio.getTelefono()+" y domicilio en "+socio.getDireccion());
+        }
 
         acceso.Apagar(); //Cerramos el sessionFactory al cerrar la aplicacion
 

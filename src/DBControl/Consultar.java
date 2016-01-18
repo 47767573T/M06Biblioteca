@@ -17,8 +17,8 @@ public class Consultar {
         if (!UltimaConsulta.isEmpty())UltimaConsulta.clear();
 
         Session session = Acceso.getSession("Consultar_libroPorTitulo");
-        Query query = session.createQuery("from Libros where titulo= :t");
-        query.setParameter("t", titulo);
+        Query query = session.createQuery("from Libros where titulo= :x");
+        query.setParameter("x", titulo);
 
         UltimaConsulta = query.list();
 
@@ -29,8 +29,8 @@ public class Consultar {
         if (!UltimaConsulta.isEmpty())UltimaConsulta.clear();
 
         Session session = Acceso.getSession("Consultar_libroPorEditorial");
-        Query query = session.createQuery("from Libros where editorial= :e");
-        query.setParameter("e", editorial);
+        Query query = session.createQuery("from Libros where editorial= :x");
+        query.setParameter("x", editorial);
 
         UltimaConsulta = query.list();
 
@@ -41,8 +41,32 @@ public class Consultar {
         if (!UltimaConsulta.isEmpty())UltimaConsulta.clear();
 
         Session session = Acceso.getSession("Consultar_libroPorAnoEdicion");
-        Query query = session.createQuery("from Libros where anoEdicion= :e");
-        query.setParameter("e", ano);
+        Query query = session.createQuery("from Libros where anoEdicion= :x");
+        query.setParameter("x", ano);
+
+        UltimaConsulta = query.list();
+
+        return UltimaConsulta;
+    }
+
+    public static List<Object> socioPorNombre(String nombre){
+        if (!UltimaConsulta.isEmpty())UltimaConsulta.clear();
+
+        Session session = Acceso.getSession("Consultar_socioPorNombre");
+        Query query = session.createQuery("from Socios where nombre= :x");
+        query.setParameter("x", nombre);
+
+        UltimaConsulta = query.list();
+
+        return UltimaConsulta;
+    }
+
+    public static List<Object> socioPorApellido(String apellido){
+        if (!UltimaConsulta.isEmpty())UltimaConsulta.clear();
+
+        Session session = Acceso.getSession("Consultar_socioPorApellido");
+        Query query = session.createQuery("from Socios where apellido= :x");
+        query.setParameter("x", apellido);
 
         UltimaConsulta = query.list();
 

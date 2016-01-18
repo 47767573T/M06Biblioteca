@@ -2,7 +2,7 @@
  
 Libros
 	_Ingresar
-	_Borrar
+	_Borrar por Id
 	Modificar
 	
 Socios
@@ -21,13 +21,13 @@ Consultas
 		Prestados a socio determinado
 		Que han superado la fecha de prestamos
 		_Por título
-		Por editorial
-		Por año de edicion
+		_Por editorial
+		_Por año de edicion
 	
 	Socios
 		Que tienen libros que han superado la fecha de prestamos
-		Por nombre
-		Por Apellido
+		_Por nombre
+		_Por Apellido
 	
 Validaciones
 	Libros
