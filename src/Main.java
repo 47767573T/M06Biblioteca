@@ -39,26 +39,25 @@ public class Main {
 
         //CONSULTAS::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         //Libros.................................................................................
-        List<Object> librosPorTitulo = DBControl.Consultar.libroPorTitulo("tit2");
-        for (int i = 0; i < librosPorTitulo.size(); i++) {
-            Libros libro = (Libros)librosPorTitulo.get(i);
+        List<Object> consulta1 = DBControl.Consultar.querySimple("Libros", "titulo", "tit2");
+        for (int i = 0; i < consulta1.size(); i++) {
+            Libros libro = (Libros)consulta1.get(i);
             System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
         }
 
-        List<Object> librosPorEditorial = DBControl.Consultar.libroPorEditorial("ed2");
-        for (int i = 0; i < librosPorEditorial.size(); i++) {
-            Libros libro = (Libros)librosPorEditorial.get(i);
+        List<Object> consulta2 = DBControl.Consultar.querySimple("Libros", "editorial", "ed2");
+        for (int i = 0; i < consulta2.size(); i++) {
+            Libros libro = (Libros)consulta2.get(i);
             System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
         }
 
-        List<Object> librosPorAnoEdicion = DBControl.Consultar.libroPorAnoEdicion(2005);
-        for (int i = 0; i < librosPorAnoEdicion.size(); i++) {
-            Libros libro = (Libros)librosPorAnoEdicion.get(i);
+        List<Object> consulta3 = DBControl.Consultar.querySimple("Libros", "anoedicion", "2005");
+        for (int i = 0; i < consulta3 .size(); i++) {
+            Libros libro = (Libros)consulta3 .get(i);
             System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
         }
 
-
-
+/*
 
         //Socios.................................................................................
 
@@ -66,7 +65,7 @@ public class Main {
         for (int i = 0; i < librosPorAnoEdicion.size(); i++) {
             Socios socio = (Socios)sociosPorNombre.get(i);
             System.out.println("\t"+socio.getNombre()+" "+socio.getApellido()+" ("+socio.getEdad()+") con tlf "
-                +socio.getTelefono()+" y domicilio en "+socio.getDireccion());
+                    +socio.getTelefono()+" y domicilio en "+socio.getDireccion());
         }
 
         List<Object> sociosPorApellido= DBControl.Consultar.socioPorApellido("cognom2");
@@ -77,7 +76,7 @@ public class Main {
         }
 
         acceso.Apagar(); //Cerramos el sessionFactory al cerrar la aplicacion
-
+*/
     }
 
     public static void ComprobarTablas (Session session){

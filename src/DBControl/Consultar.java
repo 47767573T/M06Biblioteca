@@ -12,7 +12,7 @@ import java.util.List;
 public class Consultar {
 
     static List<Object> UltimaConsulta = new ArrayList<>();
-
+/*
     public static List<Object> libroPorTitulo(String titulo){
         if (!UltimaConsulta.isEmpty())UltimaConsulta.clear();
 
@@ -24,53 +24,22 @@ public class Consultar {
 
         return UltimaConsulta;
     }
+*/
+    public static List<Object> querySimple (String tabla, String columna, String itemDeBusqueda, int type){
 
-    public static List<Object> libroPorEditorial(String editorial){
         if (!UltimaConsulta.isEmpty())UltimaConsulta.clear();
 
-        Session session = Acceso.getSession("Consultar_libroPorEditorial");
-        Query query = session.createQuery("from Libros where editorial= :x");
-        query.setParameter("x", editorial);
+        Session session = Acceso.getSession("Consultar_"+tabla+"_"+columna+"_"+itemDeBusqueda);
+        Query query = session.createQuery("from "+tabla+" where "+columna+" = :x");
+
+        if (type == 0) query.setParameter("x", itemDeBusqueda);
+        if (type == 1) query.setParameter("x", Integer.parseInt(itemDeBusqueda));
+        if (type == 2) query.
 
         UltimaConsulta = query.list();
 
         return UltimaConsulta;
     }
 
-    public static List<Object> libroPorAnoEdicion(int ano){
-        if (!UltimaConsulta.isEmpty())UltimaConsulta.clear();
-
-        Session session = Acceso.getSession("Consultar_libroPorAnoEdicion");
-        Query query = session.createQuery("from Libros where anoEdicion= :x");
-        query.setParameter("x", ano);
-
-        UltimaConsulta = query.list();
-
-        return UltimaConsulta;
-    }
-
-    public static List<Object> socioPorNombre(String nombre){
-        if (!UltimaConsulta.isEmpty())UltimaConsulta.clear();
-
-        Session session = Acceso.getSession("Consultar_socioPorNombre");
-        Query query = session.createQuery("from Socios where nombre= :x");
-        query.setParameter("x", nombre);
-
-        UltimaConsulta = query.list();
-
-        return UltimaConsulta;
-    }
-
-    public static List<Object> socioPorApellido(String apellido){
-        if (!UltimaConsulta.isEmpty())UltimaConsulta.clear();
-
-        Session session = Acceso.getSession("Consultar_socioPorApellido");
-        Query query = session.createQuery("from Socios where apellido= :x");
-        query.setParameter("x", apellido);
-
-        UltimaConsulta = query.list();
-
-        return UltimaConsulta;
-    }
 
 }
