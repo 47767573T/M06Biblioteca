@@ -1,0 +1,45 @@
+ - ToDos -
+ 
+Libros
+	_Ingresar
+	_Borrar por Id
+	Modificar
+	
+Socios
+	_Ingresar
+	_Borrar por Id
+	Modificar
+
+Prestamos
+	Ingresar
+	Borrar
+	Modificar
+	
+Consultas
+	Libros
+		Prestados
+		Prestados a socio determinado
+		Que han superado la fecha de prestamos
+		_Por título
+		_Por editorial
+		_Por año de edicion
+	
+	Socios
+		Que tienen libros que han superado la fecha de prestamos
+		_Por nombre
+		_Por Apellido
+	
+Validaciones
+	Libros
+		Al borrar avisar si esta en prestamos
+		Al Ingresar avisar si existe por titulo y año de edicion
+		Al modificar avisar si esta en prestamos
+	
+	Socios	
+		Al borrar avisar si tiene libros en prestamos
+		Al ingresar avisar si existe por nombre y apellidos
+		Al modificar avisar si esta en prestamos
+		
+	Prestamos	
+		Si el Libro existe
+		Si el Socio existe
