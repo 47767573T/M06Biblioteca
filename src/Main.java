@@ -39,28 +39,26 @@ public class Main {
 
         //CONSULTAS::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         //Libros.................................................................................
-        List<Object> consulta1 = DBControl.Consultar.querySimple("Libros", "titulo", "tit2");
+        List<Object> consulta1 = DBControl.Consultar.querySimple("Libros", "titulo", "tit2",0);
         for (int i = 0; i < consulta1.size(); i++) {
             Libros libro = (Libros)consulta1.get(i);
             System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
         }
 
-        List<Object> consulta2 = DBControl.Consultar.querySimple("Libros", "editorial", "ed2");
+        List<Object> consulta2 = DBControl.Consultar.querySimple("Libros", "editorial", "ed2",0);
         for (int i = 0; i < consulta2.size(); i++) {
             Libros libro = (Libros)consulta2.get(i);
             System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
         }
 
-        List<Object> consulta3 = DBControl.Consultar.querySimple("Libros", "anoedicion", "2005");
+        List<Object> consulta3 = DBControl.Consultar.querySimple("Libros", "anoedicion", "2005",1);
         for (int i = 0; i < consulta3 .size(); i++) {
             Libros libro = (Libros)consulta3 .get(i);
             System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
         }
 
 /*
-
         //Socios.................................................................................
-
         List<Object> sociosPorNombre= DBControl.Consultar.socioPorNombre("nom2");
         for (int i = 0; i < librosPorAnoEdicion.size(); i++) {
             Socios socio = (Socios)sociosPorNombre.get(i);
@@ -74,9 +72,9 @@ public class Main {
             System.out.println("\t"+socio.getNombre()+" "+socio.getApellido()+" ("+socio.getEdad()+") con tlf "
                     +socio.getTelefono()+" y domicilio en "+socio.getDireccion());
         }
-
-        acceso.Apagar(); //Cerramos el sessionFactory al cerrar la aplicacion
 */
+        acceso.Apagar(); //Cerramos el sessionFactory al cerrar la aplicacion
+
     }
 
     public static void ComprobarTablas (Session session){

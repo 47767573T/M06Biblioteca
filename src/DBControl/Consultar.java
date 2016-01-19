@@ -34,7 +34,7 @@ public class Consultar {
 
         if (type == 0) query.setParameter("x", itemDeBusqueda);
         if (type == 1) query.setParameter("x", Integer.parseInt(itemDeBusqueda));
-        if (type == 2) query.
+
 
         UltimaConsulta = query.list();
 
