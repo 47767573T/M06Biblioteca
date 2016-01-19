@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40">
+  <tabs>
+    <Tab fx:id="tabDarAlta" text="Dar Alta">
+         <content>
+            <AnchorPane fx:id="anpDarAlta" prefHeight="82.0" prefWidth="400.0">
+               <children>
+                  <AnchorPane fx:id="anpMenuDarAlta" prefHeight="103.0" prefWidth="400.0" />
+                  <ListView fx:id="livDarAlta" layoutY="103.0" prefHeight="263.0" prefWidth="400.0" />
+               </children>
+            </AnchorPane>
+         </content>
+    </Tab>
+    <Tab fx:id="tabDarBaja" text="Dar Baja">
+      <content>
+        <AnchorPane fx:id="anpDarBaja" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane fx:id="anpMenuDarAlta1" prefHeight="103.0" prefWidth="400.0" />
+                  <ListView fx:id="livDarAlta1" layoutY="103.0" prefHeight="263.0" prefWidth="400.0" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab fx:id="tabConsultar" text="Consultar">
+        <content>
+          <AnchorPane fx:id="anpConsultar" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane fx:id="anpMenuDarAlta11" prefHeight="103.0" prefWidth="400.0" />
+                  <ListView fx:id="livDarAlta11" layoutY="103.0" prefHeight="263.0" prefWidth="400.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab fx:id="tabModificar" text="Modificar">
+        <content>
+          <AnchorPane fx:id="anpModificar" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane fx:id="anpMenuDarAlta111" prefHeight="103.0" prefWidth="400.0" />
+                  <ListView fx:id="livDarAlta111" layoutY="103.0" prefHeight="263.0" prefWidth="400.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>
