@@ -20,8 +20,8 @@
       <content>
         <AnchorPane fx:id="anpDarBaja" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <AnchorPane fx:id="anpMenuDarAlta1" prefHeight="103.0" prefWidth="400.0" />
-                  <ListView fx:id="livDarAlta1" layoutY="103.0" prefHeight="263.0" prefWidth="400.0" />
+                  <AnchorPane fx:id="anpMenuDarBaja" prefHeight="103.0" prefWidth="400.0" />
+                  <ListView fx:id="livDarBaja" layoutY="103.0" prefHeight="263.0" prefWidth="400.0" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -29,8 +29,8 @@
         <content>
           <AnchorPane fx:id="anpConsultar" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <AnchorPane fx:id="anpMenuDarAlta11" prefHeight="103.0" prefWidth="400.0" />
-                  <ListView fx:id="livDarAlta11" layoutY="103.0" prefHeight="263.0" prefWidth="400.0" />
+                  <AnchorPane fx:id="anpMenuConsultar" prefHeight="103.0" prefWidth="400.0" />
+                  <ListView fx:id="livConsultar" layoutY="103.0" prefHeight="263.0" prefWidth="400.0" />
                </children>
             </AnchorPane>
         </content>
@@ -39,8 +39,8 @@
         <content>
           <AnchorPane fx:id="anpModificar" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <AnchorPane fx:id="anpMenuDarAlta111" prefHeight="103.0" prefWidth="400.0" />
-                  <ListView fx:id="livDarAlta111" layoutY="103.0" prefHeight="263.0" prefWidth="400.0" />
+                  <AnchorPane fx:id="anpModificar" prefHeight="103.0" prefWidth="400.0" />
+                  <ListView fx:id="livModificar" layoutY="103.0" prefHeight="263.0" prefWidth="400.0" />
                </children>
             </AnchorPane>
         </content>
