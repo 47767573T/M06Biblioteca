@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:postgresql://192.168.1.134:5432/biblioteca</property>
+        <property name="connection.url">jdbc:postgresql://172.31.104.118:5432/biblioteca</property>
 
         <property name="connection.driver_class">org.postgresql.Driver</property>
 
@@ -12,7 +12,7 @@
 
         <property name="connection.password">moisesbiblio</property>
 
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">create-drop</property>
 
         <mapping class="DBObjects.Libros"/>
         <mapping class="DBObjects.Socios"/>

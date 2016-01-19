@@ -14,7 +14,7 @@ import java.util.Date;
 public class Prestamo implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @NotNull
     private int id;
 

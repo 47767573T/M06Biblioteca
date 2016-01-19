@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Socios implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @NotNull
     private int id;
     //@Column (name = "nombre")
@@ -39,6 +39,10 @@ public class Socios implements Serializable{
     }
 
     public Socios(){}
+
+    public Socios(int id){
+        this.id = id;
+    }
 
 
     //GETTERS & SETTERS

@@ -12,19 +12,7 @@ import java.util.List;
 public class Consultar {
 
     static List<Object> UltimaConsulta = new ArrayList<>();
-/*
-    public static List<Object> libroPorTitulo(String titulo){
-        if (!UltimaConsulta.isEmpty())UltimaConsulta.clear();
 
-        Session session = Acceso.getSession("Consultar_libroPorTitulo");
-        Query query = session.createQuery("from Libros where titulo= :x");
-        query.setParameter("x", titulo);
-
-        UltimaConsulta = query.list();
-
-        return UltimaConsulta;
-    }
-*/
     public static List<Object> querySimple (String tabla, String columna, String itemDeBusqueda, int type){
 
         if (!UltimaConsulta.isEmpty())UltimaConsulta.clear();
@@ -34,7 +22,6 @@ public class Consultar {
 
         if (type == 0) query.setParameter("x", itemDeBusqueda);
         if (type == 1) query.setParameter("x", Integer.parseInt(itemDeBusqueda));
-
 
         UltimaConsulta = query.list();
 

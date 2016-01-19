@@ -1,6 +1,7 @@
 package DBObjects;
 
 import com.sun.istack.internal.NotNull;
+import org.hibernate.mapping.Constraint;
 
 import java.io.Serializable;
 
@@ -11,11 +12,10 @@ import javax.persistence.*;
  */
 
 @Entity
-//@Table(name = "libros")
 public class Libros implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @NotNull
     private int id;
     //@Column (name = "titulo")
@@ -38,7 +38,11 @@ public class Libros implements Serializable{
         this.anoEdicion = anoEdicion;
     }
 
+
     public Libros(){}
+    public Libros(int id){
+        this.id = id;
+    }
 
     // GETTERS & SETTERS
     public int getId() {

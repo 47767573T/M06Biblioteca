@@ -48,25 +48,4 @@ public class Acceso {
 
     public static void Apagar() {sessionFactory.close();}
 
-
-
-    /*
-        public static ServiceRegistry nuevaServiceRegistry() {
-            System.out.println("llega a registro");
-            return new ServiceRegistryBuilder()
-                    .applySettings(configuration.getProperties())
-                    .buildServiceRegistry();
-        }
-
-        private static SessionFactory nuevaSessionFactory() {
-            try{
-                System.out.println("Entra en nueva session factory");
-                return configuration.buildSessionFactory(serviceRegistry);
-            }catch(Throwable ex){
-                throw new ExceptionInInitializerError(ex);
-            }
-        }
-    */
-
-
 }

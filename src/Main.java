@@ -32,10 +32,11 @@ public class Main {
         //INSERTAR:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         DBControl.Insertar.nuevoLibro();
         DBControl.Insertar.nuevoSocio();
+        DBControl.Insertar.nuevoPrestamo();
 
         //ELIMINAR:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        DBControl.Eliminar.libroPorId(1);
-        DBControl.Eliminar.socioPorId(4);
+        DBControl.Eliminar.libroPorId(2);
+        DBControl.Eliminar.socioPorId(3);
 
         //CONSULTAS::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         //Libros.................................................................................
@@ -51,7 +52,7 @@ public class Main {
             System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
         }
 
-        List<Object> consulta3 = DBControl.Consultar.querySimple("Libros", "anoedicion", "2005",1);
+        List<Object> consulta3 = DBControl.Consultar.querySimple("Libros", "anoedicion", "1999",1);
         for (int i = 0; i < consulta3 .size(); i++) {
             Libros libro = (Libros)consulta3 .get(i);
             System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());

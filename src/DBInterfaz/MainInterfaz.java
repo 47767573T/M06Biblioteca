@@ -20,8 +20,8 @@ public class MainInterfaz extends Application {
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfazGrafica.fxml"));
         Parent root = loader.load();
-        primaryStage.setTitle("Biblioteca");
-        primaryStage.setScene(new Scene(root, 200, 500));
+        primaryStage.setTitle("M06Biblioteca");
+        primaryStage.setScene(new Scene(root, 400, 400));
         primaryStage.show();
     }
 }
