@@ -18,10 +18,10 @@ public class Prestamo implements Serializable{
     @NotNull
     private int id;
 
-    @OneToOne(targetEntity = Libros.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Libros.class, fetch = FetchType.EAGER)
     private Libros idLibro;
 
-    @OneToOne(targetEntity = Socios.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Socios.class, fetch = FetchType.EAGER)
     private Socios idSocio;
 
     private Date fechaIni;
@@ -37,6 +37,10 @@ public class Prestamo implements Serializable{
     }
 
     public Prestamo(){}
+
+    public Prestamo(int id){
+        this.id = id;
+    }
 
     // GETTERS & SETTERS
     public int getId() {

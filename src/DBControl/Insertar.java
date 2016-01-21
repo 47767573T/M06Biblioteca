@@ -12,6 +12,8 @@ import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Random;
 
 /**
  * Created by Moises on 17/01/2016.
@@ -19,6 +21,7 @@ import java.util.Date;
 public class Insertar{
 
     SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+    static Random rnd = new Random();
 
     public static void nuevoLibro(/*Libros Libro*/){
 
@@ -58,7 +61,7 @@ public class Insertar{
         session.getTransaction().commit();
     }
 
-    public static void nuevoPrestamo(/*Prestamo prestamo*/) {
+    public static void nuevoPrestamo(/*Prestamo prestamo,*/ int diasDePrestamo) {
 
         Session session = Acceso.getSession("Insertar_nuevoPrestamo");
         session.beginTransaction();
@@ -66,7 +69,7 @@ public class Insertar{
         Calendar calendar = Calendar.getInstance();
         Date diaPrestamo = calendar.getTime();
         System.out.println(diaPrestamo.toString());
-        calendar.add(Calendar.DATE,5);
+        calendar.add(GregorianCalendar.DAY_OF_YEAR,diasDePrestamo);
         Date diaDevolucion = calendar.getTime();
         System.out.println(diaPrestamo.toString());
 
@@ -76,13 +79,21 @@ public class Insertar{
         Libros libro2 = new Libros(3);
         Socios socio2 = new Socios(1);
 
+        Libros libro3 = new Libros(4);
+        Socios socio3 = new Socios(4);
+
 
         //Prestamos de prueba
         Prestamo prestamo1 = new Prestamo(libro1, socio1, diaPrestamo, diaDevolucion);
         Prestamo prestamo2 = new Prestamo(libro2, socio2, diaPrestamo, diaDevolucion);
+        Prestamo prestamo3 = new Prestamo(libro3, socio3, diaPrestamo, diaDevolucion);
 
         session.save(prestamo1);
+        System.out.println("\t Ingresado prestamo1 (libro1-Socio2)");
         session.save(prestamo2);
+        System.out.println("\t Ingresado prestamo2 (libro3-Socio1)");
+        session.save(prestamo3);
+        System.out.println("\t Ingresado prestamo3 (libro4-Socio4)");
         session.getTransaction().commit();
     }
 

@@ -40,6 +40,7 @@ public class Libros implements Serializable{
 
 
     public Libros(){}
+
     public Libros(int id){
         this.id = id;
     }
