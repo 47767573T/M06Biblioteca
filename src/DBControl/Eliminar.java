@@ -22,7 +22,7 @@ public class Eliminar {
 
     public static void socioPorId(int Id){
 
-        Session session = Acceso.getSession("Eliminar_libroPorId");
+        Session session = Acceso.getSession("Eliminar_SocioPorId");
 
         session.beginTransaction();
         Socios socio = new Socios(Id);

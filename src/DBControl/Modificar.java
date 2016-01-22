@@ -37,7 +37,7 @@ public class Modificar {
                 query.setParameter("valorConsultar", itemDeConsulta);
                 System.out.println("Modificado de "+tabla+"_"+colModificar+" a valor="+itemNuevo+" cuando "
                         +colConsultar+" sea valor="+itemDeConsulta);
-                session.update()
+                //session.upda;
                 session.getTransaction().commit();
                 break;
 

@@ -21,16 +21,16 @@ public class Libros implements Serializable{
     //@Column (name = "titulo")
     private String titulo;
     //@Column (name = "unidades")
-    private int unidades;
+    private String unidades;
     //@Column (name = "editorial")
     private String editorial;
     //@Column (name = "paginas")
-    private int paginas;
+    private String paginas;
     //@Column (name = "anoEdicion")
-    private int anoEdicion;
+    private String anoEdicion;
 
     //CONSTRUCTORES
-    public Libros(String titulo, int unidades, String editorial, int paginas, int anoEdicion) {
+    public Libros(String titulo, String unidades, String editorial, String paginas, String anoEdicion) {
         this.titulo = titulo;
         this.unidades = unidades;
         this.editorial = editorial;
@@ -62,11 +62,11 @@ public class Libros implements Serializable{
         this.titulo = titulo;
     }
 
-    public int getUnidades() {
+    public String getUnidades() {
         return unidades;
     }
 
-    public void setUnidades(int unidades) {
+    public void setUnidades(String unidades) {
         this.unidades = unidades;
     }
 
@@ -78,19 +78,19 @@ public class Libros implements Serializable{
         this.editorial = editorial;
     }
 
-    public int getPaginas() {
+    public String getPaginas() {
         return paginas;
     }
 
-    public void setPaginas(int paginas) {
+    public void setPaginas(String paginas) {
         this.paginas = paginas;
     }
 
-    public int getAnoEdicion() {
+    public String getAnoEdicion() {
         return anoEdicion;
     }
 
-    public void setAnoEdicion(int anoEdicion) {
+    public void setAnoEdicion(String anoEdicion) {
         this.anoEdicion = anoEdicion;
     }
 }
