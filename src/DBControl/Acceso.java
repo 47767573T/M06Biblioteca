@@ -43,9 +43,7 @@ public class Acceso {
     public static Session getSession(String callClass) throws HibernateException {
         System.out.println("peticion de acceso desde "+callClass);
         return sessionFactory.openSession();
-
     }
 
     public static void Apagar() {sessionFactory.close();}
-
 }

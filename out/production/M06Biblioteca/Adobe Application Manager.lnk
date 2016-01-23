@@ -3,17 +3,17 @@
 Libros
 	_Ingresar
 	_Borrar por Id
-	Modificar
+	_Modificar
 	
 Socios
 	_Ingresar
 	_Borrar por Id
-	Modificar
+	_Modificar
 
 Prestamos
-	Ingresar
-	Borrar
-	Modificar
+	_Ingresar
+	_Borrar por Id
+	_Modificar (Solo con id existentes)
 	
 Consultas
 	Libros

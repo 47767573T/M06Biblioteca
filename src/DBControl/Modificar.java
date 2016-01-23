@@ -13,37 +13,40 @@ public class Modificar {
 
     static List<Object> UltimaConsulta = new ArrayList<>();
 
+    //public static void insertarSocio(){ }
+
     public static void querySimple (String tabla, String colConsultar, String itemDeConsulta
-            , String colModificar, String itemNuevo, int type) {
+            , String colModificar, String itemNuevo) {
 
         if (!UltimaConsulta.isEmpty()) UltimaConsulta.clear();
 
+
         Session session = Acceso.getSession("Modificar_" + tabla);
+        session.beginTransaction();
         Query query = session.createQuery("update " + tabla + " set " + colModificar + " = :valorModificar"
                 + " where " + colConsultar + " =:valorConsultar");
 
-        switch (type) {
-            case 0:
-                query.setParameter("valorModificar", itemNuevo);
-                query.setParameter("valorConsultar", itemDeConsulta);
-                System.out.println("Modificado de "+tabla+"_"+colModificar+" a valor="+itemNuevo+" cuando "
-                        +colConsultar+" sea valor="+itemDeConsulta);
 
-                session.getTransaction().commit();
-                break;
-
-            case 1:
-                query.setParameter("valorModificar", Integer.parseInt(itemNuevo));
-                query.setParameter("valorConsultar", itemDeConsulta);
-                System.out.println("Modificado de "+tabla+"_"+colModificar+" a valor="+itemNuevo+" cuando "
-                        +colConsultar+" sea valor="+itemDeConsulta);
-                //session.upda;
-                session.getTransaction().commit();
-                break;
-
-            default:
-                System.out.println("Modificado en " + tabla + " de " + colModificar + " tipo de dato erróneo");
-                break;
+        //Si los parametros de consulta son para el campo ID cambiamos el tipo de variable a Integer
+        //Validamos el tipo de variable pide en el campo a consultar
+        if (colConsultar.startsWith("id")){
+            query.setParameter("valorConsultar", Integer.parseInt(itemDeConsulta));
+        }else{
+            query.setParameter("valorConsultar", itemDeConsulta);
         }
+
+        //Validamos el tipo de variable pide en el campo a modificar
+        if (colModificar.startsWith("id")){
+            query.setParameter("valorModificar", Integer.parseInt(itemNuevo));
+        }else{
+            query.setParameter("valorModificar", itemNuevo);
+        }
+
+        System.out.println("Modificado de "+tabla+"_"+colModificar+" a valor="+itemNuevo+" cuando "
+                +colConsultar+" sea valor="+itemDeConsulta);
+
+        int result = query.executeUpdate();
+        System.out.println(result+" campos afectados");
+        session.getTransaction().commit();
     }
 }

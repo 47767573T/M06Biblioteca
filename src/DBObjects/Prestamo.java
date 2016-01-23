@@ -24,12 +24,12 @@ public class Prestamo implements Serializable{
     @ManyToOne(targetEntity = Socios.class, fetch = FetchType.EAGER)
     private Socios idSocio;
 
-    private Date fechaIni;
+    private String fechaIni;
 
-    private Date fechaFin;
+    private String fechaFin;
 
     //CONSTRUCTORES
-    public Prestamo(Libros idLibro, Socios idSocio, Date fechaIni, Date fechaFin) {
+    public Prestamo(Libros idLibro, Socios idSocio, String fechaIni, String fechaFin) {
         this.idLibro = idLibro;
         this.idSocio = idSocio;
         this.fechaIni = fechaIni;
@@ -71,19 +71,19 @@ public class Prestamo implements Serializable{
         this.idSocio = idSocio;
     }
 
-    public Date getFechaIni() {
+    public String getFechaIni() {
         return fechaIni;
     }
 
-    public void setFechaIni(Date fechaIni) {
+    public void setFechaIni(String fechaIni) {
         this.fechaIni = fechaIni;
     }
 
-    public Date getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
 }
