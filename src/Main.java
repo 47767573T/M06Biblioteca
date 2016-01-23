@@ -1,5 +1,6 @@
 import DBControl.Acceso;
 import DBObjects.Libros;
+import DBObjects.Prestamo;
 import DBObjects.Socios;
 import org.hibernate.Session;
 import org.hibernate.Query;
@@ -32,11 +33,12 @@ public class Main {
         //INSERTAR:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         DBControl.Insertar.nuevoLibro();
         DBControl.Insertar.nuevoSocio();
-        DBControl.Insertar.nuevoPrestamo();
+        DBControl.Insertar.nuevoPrestamo(5);
 
         //ELIMINAR:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         DBControl.Eliminar.libroPorId(2);
         DBControl.Eliminar.socioPorId(3);
+        DBControl.Eliminar.PrestamosPorId(3);
 
         //CONSULTAS::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         //Libros.................................................................................
@@ -53,10 +55,19 @@ public class Main {
         }
 
         List<Object> consulta3 = DBControl.Consultar.querySimple("Libros", "anoedicion", "1999",1);
-        for (int i = 0; i < consulta3 .size(); i++) {
+        for (int i = 0; i < consulta3.size(); i++) {
             Libros libro = (Libros)consulta3 .get(i);
             System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
         }
+
+        List<Object> consulta4 = DBControl.Consultar.querySimple("Prestamo", "idlibro_id", "1",1);
+        for (int i = 0; i < consulta4.size(); i++) {
+            Prestamo prestamo = (Prestamo)consulta4.get(i);
+            System.out.println("\t("+prestamo.getFechaFin()+" - "+prestamo.getFechaFin()+") de ID="+prestamo.getId());
+        }
+
+        //MODIFICAR
+        DBControl.Modificar.querySimple("Libros", "titulo", "tit2", "anoedicion", "2001", 1);
 
 /*
         //Socios.................................................................................

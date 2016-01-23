@@ -20,13 +20,19 @@ public class Consultar {
         Session session = Acceso.getSession("Consultar_"+tabla+"_"+columna+"_"+itemDeBusqueda);
         Query query = session.createQuery("from "+tabla+" where "+columna+" = :x");
 
-        if (type == 0) query.setParameter("x", itemDeBusqueda);
-        if (type == 1) query.setParameter("x", Integer.parseInt(itemDeBusqueda));
+        switch (type){
+            case 0:
+                query.setParameter("x", itemDeBusqueda);
+                break;
+            case 1:
+                query.setParameter("x", Integer.parseInt(itemDeBusqueda));
+                break;
+            default:
+                System.out.println("Consulta en "+tabla+" de "+columna+" tipo de dato erróneo");
+        }
 
         UltimaConsulta = query.list();
 
         return UltimaConsulta;
     }
-
-
 }

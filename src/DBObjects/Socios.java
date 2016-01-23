@@ -16,21 +16,21 @@ public class Socios implements Serializable{
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @NotNull
-    private int id;
+    private Integer id;
     //@Column (name = "nombre")
     String nombre;
     //@Column (name = "apellido")
     String apellido;
     //@Column (name = "edad")
-    int edad;
+    String edad;
     //@Column (name = "direccion")
     String direccion;
     //@Column (name = "telefono")
-    int telefono;
+    String telefono;
 
 
     //CONSTRUCTORES
-    public Socios(String nombre, String apellido, int edad, String direccion, int telefono) {
+    public Socios(String nombre, String apellido, String edad, String direccion, String telefono) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
@@ -66,11 +66,11 @@ public class Socios implements Serializable{
         this.apellido = apellido;
     }
 
-    public int getEdad() {
+    public String getEdad() {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(String edad) {
         this.edad = edad;
     }
 
@@ -82,11 +82,11 @@ public class Socios implements Serializable{
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 }
