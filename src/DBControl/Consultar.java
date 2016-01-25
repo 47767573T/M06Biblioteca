@@ -62,7 +62,6 @@ public class Consultar {
         }
     }
 
-
     public static List<Libros> queryLibros (String titulo, String editorial, String anoedicion, String pag
             , String unidades) {
 
@@ -78,16 +77,28 @@ public class Consultar {
         }
 
         if (!editorial.equals("0") && !inicioDeQuery)queryMontada += " AND (editorial = :ed)";
-        else if (!editorial.equals("0") && inicioDeQuery)queryMontada +="(editorial = :ed)";
+        else if (!editorial.equals("0") && inicioDeQuery){
+            queryMontada +="(editorial = :ed)";
+            inicioDeQuery = false;
+        }
 
         if (!anoedicion.equals("0") && !inicioDeQuery)queryMontada += " AND (anoedicion = :ano)";
-        else if (!anoedicion.equals("0") && inicioDeQuery)queryMontada += " (anoedicion = :ano)";
+        else if (!anoedicion.equals("0") && inicioDeQuery){
+            queryMontada += " (anoedicion = :ano)";
+            inicioDeQuery = false;
+        }
 
         if (!pag.equals("0") && !inicioDeQuery)queryMontada += " AND (paginas = :pags)";
-        else if (!pag.equals("0") && inicioDeQuery)queryMontada += " (paginas = :pags)";
+        else if (!pag.equals("0") && inicioDeQuery){
+            queryMontada += " (paginas = :pags)";
+            inicioDeQuery = false;
+        }
 
         if (!unidades.equals("0") && !inicioDeQuery)queryMontada += " AND (unidades= :uni)";
-        else if (!unidades.equals("0") && inicioDeQuery)queryMontada += " (unidades= :uni)";
+        else if (!unidades.equals("0") && inicioDeQuery){
+            queryMontada += " (unidades= :uni)";
+            inicioDeQuery = false;
+        }
 
         if (titulo.equals("0") && editorial.equals("0") && anoedicion.equals("0") && pag.equals("0")
                 && unidades.equals("0")){
@@ -122,13 +133,22 @@ public class Consultar {
         }
 
         if (!apellido.equals("0") && !inicioDeQuery)queryMontada += " AND (apellido = :cognom)";
-        else if (!apellido.equals("0") && inicioDeQuery)queryMontada +="(apellido = :cognom)";
+        else if (!apellido.equals("0") && inicioDeQuery){
+            queryMontada +="(apellido = :cognom)";
+            inicioDeQuery = false;
+        }
 
         if (!direccion.equals("0") && !inicioDeQuery)queryMontada += " AND (direccion = :dir)";
-        else if (!direccion.equals("0") && inicioDeQuery)queryMontada += " (direcion = :dir)";
+        else if (!direccion.equals("0") && inicioDeQuery){
+            queryMontada += " (direcion = :dir)";
+            inicioDeQuery = false;
+        }
 
         if (!telefono.equals("0") && !inicioDeQuery)queryMontada += " AND (telefono = :tlfn)";
-        else if (!telefono.equals("0") && inicioDeQuery)queryMontada += " (telefono = :tlfn)";
+        else if (!telefono.equals("0") && inicioDeQuery){
+            queryMontada += " (telefono = :tlfn)";
+            inicioDeQuery = false;
+        }
 
         if (nombre.equals("0") && apellido.equals("0") && direccion.equals("0") && telefono.equals("0")){
             queryMontada = "from Socios";
@@ -161,21 +181,26 @@ public class Consultar {
         }
 
         if (idSocio != 0 && !inicioDeQuery)queryMontada += " AND (idSocio.id = :ids)";
-        else if (idSocio != 0 && inicioDeQuery)queryMontada += "(idSocio.id = :ids)";
+        else if (idSocio != 0 && inicioDeQuery){
+            queryMontada += "(idSocio.id = :ids)";
+            inicioDeQuery = false;
+        }
 
         if (!fechaIni.equals("0") && !inicioDeQuery)queryMontada += " AND (fechaIni = :ini)";
-        else if (!fechaIni.equals("0") && inicioDeQuery)queryMontada += " (fechaIni = :ini)";
+        else if (!fechaIni.equals("0") && inicioDeQuery) {
+            queryMontada += " (fechaIni = :ini)";
+            inicioDeQuery = false;
+        }
 
         if (!fechaFin.equals("0") && !inicioDeQuery)queryMontada += " AND (fechaFin = :fin)";
-        else if (!fechaFin.equals("0") && inicioDeQuery)queryMontada += " (fechaFin = :fin)";
+        else if (!fechaFin.equals("0") && inicioDeQuery){
+            queryMontada += " (fechaFin = :fin)";
+            inicioDeQuery = false;
+        }
 
         if (idSocio != 0 && idLibro == 0 && fechaFin.equals("0") && fechaIni.equals("0")){
             queryMontada = "from Prestamo where idSocio.id = :ids";
         }
-
-        /*if (idLibro != 0 && idSocio == 0 && fechaFin.equals("0") && fechaIni.equals("0")){
-            queryMontada = "from Prestamo where idLibro.id = :idl";
-        }*/
 
         Query query = session.createQuery(queryMontada);
 

@@ -2,33 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="233daba7-bc00-4952-be53-0daece77d3e7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DBInterfaz/InterfazTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/M06Biblioteca/DBControl/Acceso.class" afterPath="$PROJECT_DIR$/out/production/M06Biblioteca/DBControl/Acceso.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/M06Biblioteca/DBControl/Consultar.class" afterPath="$PROJECT_DIR$/out/production/M06Biblioteca/DBControl/Consultar.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/M06Biblioteca/DBControl/Eliminar.class" afterPath="$PROJECT_DIR$/out/production/M06Biblioteca/DBControl/Eliminar.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/M06Biblioteca/DBControl/Insertar.class" afterPath="$PROJECT_DIR$/out/production/M06Biblioteca/DBControl/Insertar.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/M06Biblioteca/DBObjects/Libros.class" afterPath="$PROJECT_DIR$/out/production/M06Biblioteca/DBObjects/Libros.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/M06Biblioteca/DBObjects/Prestamo.class" afterPath="$PROJECT_DIR$/out/production/M06Biblioteca/DBObjects/Prestamo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/M06Biblioteca/DBObjects/Socios.class" afterPath="$PROJECT_DIR$/out/production/M06Biblioteca/DBObjects/Socios.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Hibernate_4_2_2_4_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Hibernate_4_2_2_4_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/M06Biblioteca/Hibernate_4_2_2_4_2_2.xml" afterPath="$PROJECT_DIR$/out/production/M06Biblioteca/Hibernate_4_2_2_4_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/M06Biblioteca/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/out/production/M06Biblioteca/hibernate.cfg.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Adobe Application Manager.lnk" afterPath="$PROJECT_DIR$/src/Adobe Application Manager.lnk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBControl/Acceso.java" afterPath="$PROJECT_DIR$/src/DBControl/Acceso.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/M06Biblioteca/Adobe Application Manager.lnk" afterPath="$PROJECT_DIR$/out/production/M06Biblioteca/Adobe Application Manager.lnk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBControl/Consultar.java" afterPath="$PROJECT_DIR$/src/DBControl/Consultar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBControl/Eliminar.java" afterPath="$PROJECT_DIR$/src/DBControl/Eliminar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBControl/Insertar.java" afterPath="$PROJECT_DIR$/src/DBControl/Insertar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBInterfaz/ControlInterfaz.java" afterPath="$PROJECT_DIR$/src/DBInterfaz/ControlInterfaz.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBInterfaz/InterfazGrafica.fxml" afterPath="$PROJECT_DIR$/src/DBInterfaz/InterfazGrafica.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBObjects/Libros.java" afterPath="$PROJECT_DIR$/src/DBObjects/Libros.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBObjects/Prestamo.java" afterPath="$PROJECT_DIR$/src/DBObjects/Prestamo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBObjects/Socios.java" afterPath="$PROJECT_DIR$/src/DBObjects/Socios.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MainTest.java" afterPath="$PROJECT_DIR$/src/MainTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/src/hibernate.cfg.xml" />
     </list>
     <ignored path="M06Biblioteca.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -89,8 +65,8 @@
       <file leaf-file-name="Consultar.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DBControl/Consultar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22445256">
-              <caret line="132" column="12" selection-start-line="132" selection-start-column="12" selection-end-line="132" selection-end-column="12" />
+            <state vertical-scroll-proportion="5.8321166">
+              <caret line="196" column="43" selection-start-line="196" selection-start-column="43" selection-end-line="196" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -869,7 +845,7 @@
       <workItem from="1453547521510" duration="47473000" />
       <workItem from="1453643933169" duration="6601000" />
       <workItem from="1453653680039" duration="16357000" />
-      <workItem from="1453724741923" duration="11438000" />
+      <workItem from="1453724741923" duration="13504000" />
     </task>
     <task id="LOCAL-00001" summary="Practica base mas pruebas">
       <created>1452976569221</created>
@@ -937,11 +913,17 @@
       <option name="project" value="LOCAL" />
       <updated>1453577120981</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="- casi acabado">
+      <created>1453746534044</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1453746534044</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137716000" />
+    <option name="totallyTimeSpent" value="139782000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1007,7 +989,8 @@
     <MESSAGE value="Actualizada Interfaz Grafica" />
     <MESSAGE value="Actualizada Interfaz Grafica2" />
     <MESSAGE value="- Implementado metodos de autoinsert registros en las tablas para test&#10;- Implementados metodos de busqueda por Id exclusivamente&#10;- Corregidos y mejorados metodos de consulta simple" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Implementado metodos de autoinsert registros en las tablas para test&#10;- Implementados metodos de busqueda por Id exclusivamente&#10;- Corregidos y mejorados metodos de consulta simple" />
+    <MESSAGE value="- casi acabado" />
+    <option name="LAST_COMMIT_MESSAGE" value="- casi acabado" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1458,8 +1441,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DBControl/Consultar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22445256">
-          <caret line="132" column="12" selection-start-line="132" selection-start-column="12" selection-end-line="132" selection-end-column="12" />
+        <state vertical-scroll-proportion="5.8321166">
+          <caret line="196" column="43" selection-start-line="196" selection-start-column="43" selection-end-line="196" selection-end-column="43" />
           <folding />
         </state>
       </provider>
