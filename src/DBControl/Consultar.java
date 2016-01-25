@@ -1,6 +1,7 @@
 package DBControl;
 
 import DBObjects.Libros;
+import DBObjects.Prestamo;
 import DBObjects.Socios;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,12 +23,13 @@ public class Consultar {
         session.beginTransaction();
         Query query = session.createQuery("from Libros where id = "+id);
 
-        List<Libros> libros = query.list();
-        System.out.println(libros.get(0).getTitulo());
-
-        Libros libro = libros.get(0);
-
-        return libro;
+        if (query.list().isEmpty()) {
+            Libros libro = new Libros(0);
+            return libro;
+        }
+        else { Libros libro = (Libros) query.list().get(0);
+            return libro;
+        }
     }
 
     public static Socios SocioPorId (int id){
@@ -36,57 +38,156 @@ public class Consultar {
         session.beginTransaction();
         Query query = session.createQuery("from Socios where id = "+id);
 
-        Socios socio = (Socios) query.list().get(0);
-
-        return socio;
+        if (query.list().isEmpty()) {
+            Socios socio = new Socios(0);
+            return socio;
+        }
+        else { Socios socio = (Socios) query.list().get(0);
+            return socio;
+        }
     }
 
-    public static List<Object> querySimple (String tabla, String columna, String itemDeBusqueda){
-        if (!UltimaConsulta.isEmpty())UltimaConsulta.clear();
+    public static Prestamo PrestamoPorId (int id){
 
-        //Realizamos la conexion y montamos la query
-        Session session = Acceso.getSession("Consultar_" + tabla + "_" + columna + "_" + itemDeBusqueda);
-        Query query = session.createQuery("from "+tabla+" where "+columna+" = :x");
-
-        //Si los parametros de consulta son para el campo ID cambiamos el tipo de variable a Integer
-        if (columna.startsWith("id")) {query.setParameter("x",(Integer.parseInt(itemDeBusqueda)));
-        }else{query.setParameter("x",itemDeBusqueda);}
-
-        UltimaConsulta = query.list();
-
-        return UltimaConsulta;
-    }
-
-    public static List<Object> queryCompleja (String tabla, String colConsultar, String itemDeConsulta
-            , String colModificar, String itemNuevo) {
-        if (!UltimaConsulta.isEmpty())UltimaConsulta.clear();
-
-        Session session = Acceso.getSession("Modificar_" + tabla);
+        Session session = Acceso.getSession("Consultar_PrestamoPorId_" + id);
         session.beginTransaction();
-        Query query = session.createQuery("update " + tabla + " set " + colModificar + " = :valorModificar"
-                + " where " + colConsultar + " =:valorConsultar");
+        Query query = session.createQuery("from Prestamo where id = "+id);
 
-
-        //Si los parametros de consulta son para el campo ID cambiamos el tipo de variable a Integer
-        //Validamos el tipo de variable pide en el campo a consultar
-        if (colConsultar.startsWith("id")){
-            query.setParameter("valorConsultar", Integer.parseInt(itemDeConsulta));
-        }else{
-            query.setParameter("valorConsultar", itemDeConsulta);
+        if (query.list().isEmpty()) {
+            Prestamo prestamo = new Prestamo(0);
+            return prestamo;
         }
-
-        //Validamos el tipo de variable pide en el campo a modificar
-        if (colModificar.startsWith("id")){
-            query.setParameter("valorModificar", Integer.parseInt(itemNuevo));
-        }else{
-            query.setParameter("valorModificar", itemNuevo);
+        else { Prestamo prestamo = (Prestamo) query.list().get(0);
+            return prestamo;
         }
-
-        System.out.println("Modificado de "+tabla+"_"+colModificar+" a valor="+itemNuevo+" cuando "
-                +colConsultar+" sea valor="+itemDeConsulta);
-
-        return UltimaConsulta;
     }
 
 
+    public static List<Libros> queryLibros (String titulo, String editorial, String anoedicion, String pag
+            , String unidades) {
+
+        boolean inicioDeQuery = true;
+
+        if (!UltimaConsulta.isEmpty()) UltimaConsulta.clear();
+        Session session = Acceso.getSession("Consultar_queryLibros");
+
+        String queryMontada = "from Libros where ";
+        if (!titulo.equals("0")){
+            queryMontada += "(titulo = :tit)";
+            inicioDeQuery = false;
+        }
+
+        if (!editorial.equals("0") && !inicioDeQuery)queryMontada += " AND (editorial = :ed)";
+        else if (!editorial.equals("0") && inicioDeQuery)queryMontada +="(editorial = :ed)";
+
+        if (!anoedicion.equals("0") && !inicioDeQuery)queryMontada += " AND (anoedicion = :ano)";
+        else if (!anoedicion.equals("0") && inicioDeQuery)queryMontada += " (anoedicion = :ano)";
+
+        if (!pag.equals("0") && !inicioDeQuery)queryMontada += " AND (paginas = :pags)";
+        else if (!pag.equals("0") && inicioDeQuery)queryMontada += " (paginas = :pags)";
+
+        if (!unidades.equals("0") && !inicioDeQuery)queryMontada += " AND (unidades= :uni)";
+        else if (!unidades.equals("0") && inicioDeQuery)queryMontada += " (unidades= :uni)";
+
+        if (titulo.equals("0") && editorial.equals("0") && anoedicion.equals("0") && pag.equals("0")
+                && unidades.equals("0")){
+            queryMontada = "from Libros";
+        }
+
+        System.out.println(queryMontada);
+        Query query = session.createQuery(queryMontada);
+
+        if (!titulo.equals("0")) query.setParameter("tit", titulo);
+        if (!editorial.equals("0")) query.setParameter("ed",editorial);
+        if (!anoedicion.equals("0"))query.setParameter("ano",anoedicion);
+        if (!pag.equals("0"))query.setParameter("pags",pag);
+        if (!unidades.equals("0"))query.setParameter("uni",unidades);
+
+        System.out.println(queryMontada);
+        query.list();
+
+        return query.list();
     }
+
+    public static List<Socios> querySocios (String nombre, String apellido, String direccion, String telefono){
+
+        boolean inicioDeQuery = true;
+
+        Session session = Acceso.getSession("Consultar_querySocios");
+
+        String queryMontada = "from Socios where ";
+        if (!nombre.equals("0")){
+            queryMontada += "(nombre = :nom)";
+            inicioDeQuery = false;
+        }
+
+        if (!apellido.equals("0") && !inicioDeQuery)queryMontada += " AND (apellido = :cognom)";
+        else if (!apellido.equals("0") && inicioDeQuery)queryMontada +="(apellido = :cognom)";
+
+        if (!direccion.equals("0") && !inicioDeQuery)queryMontada += " AND (direccion = :dir)";
+        else if (!direccion.equals("0") && inicioDeQuery)queryMontada += " (direcion = :dir)";
+
+        if (!telefono.equals("0") && !inicioDeQuery)queryMontada += " AND (telefono = :tlfn)";
+        else if (!telefono.equals("0") && inicioDeQuery)queryMontada += " (telefono = :tlfn)";
+
+        if (nombre.equals("0") && apellido.equals("0") && direccion.equals("0") && telefono.equals("0")){
+            queryMontada = "from Socios";
+        }
+
+        System.out.println(queryMontada);
+        Query query = session.createQuery(queryMontada);
+
+        if (!nombre.equals("0")) query.setParameter("tit", nombre);
+        if (!apellido.equals("0")) query.setParameter("cognom",apellido);
+        if (!direccion.equals("0"))query.setParameter("dir",apellido);
+        if (!telefono.equals("0"))query.setParameter("tlfn",telefono);
+
+        System.out.println(queryMontada);
+        query.list();
+
+        return query.list();
+    }
+
+    public static List<Prestamo> queryPrestamos (int idLibro, int idSocio, String fechaIni, String fechaFin){
+
+        boolean inicioDeQuery = true;
+
+        Session session = Acceso.getSession("Consultar_queryPrestamos");
+
+        String queryMontada = "from Prestamo where ";
+        if (idLibro != 0){
+            queryMontada += "(idLibro.id = :idl)";
+            inicioDeQuery = false;
+        }
+
+        if (idSocio != 0 && !inicioDeQuery)queryMontada += " AND (idSocio.id = :ids)";
+        else if (idSocio != 0 && inicioDeQuery)queryMontada += "(idSocio.id = :ids)";
+
+        if (!fechaIni.equals("0") && !inicioDeQuery)queryMontada += " AND (fechaIni = :ini)";
+        else if (!fechaIni.equals("0") && inicioDeQuery)queryMontada += " (fechaIni = :ini)";
+
+        if (!fechaFin.equals("0") && !inicioDeQuery)queryMontada += " AND (fechaFin = :fin)";
+        else if (!fechaFin.equals("0") && inicioDeQuery)queryMontada += " (fechaFin = :fin)";
+
+        if (idSocio != 0 && idLibro == 0 && fechaFin.equals("0") && fechaIni.equals("0")){
+            queryMontada = "from Prestamo where idSocio.id = :ids";
+        }
+
+        /*if (idLibro != 0 && idSocio == 0 && fechaFin.equals("0") && fechaIni.equals("0")){
+            queryMontada = "from Prestamo where idLibro.id = :idl";
+        }*/
+
+        Query query = session.createQuery(queryMontada);
+
+        if (idLibro != 0) query.setParameter("idl", idLibro);
+        if (idSocio != 0) query.setParameter("ids", idSocio);
+        if (!fechaIni.equals("0"))query.setParameter("ini", fechaIni);
+        if (!fechaFin.equals("0"))query.setParameter("fin", fechaFin);
+
+        System.out.println(queryMontada);
+        query.list();
+
+        return query.list();
+    }
+
+}

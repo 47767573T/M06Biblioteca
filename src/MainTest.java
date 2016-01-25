@@ -25,16 +25,13 @@ public class MainTest {
     public static int numLibros = 50;
     public static int numPrestamos = 5;
 
-    ArrayList<Libros> alLibros= new ArrayList<>();
-    ArrayList<Socios> alSocios= new ArrayList<>();
-    ArrayList<Prestamo> al= new ArrayList<>();
-
     public static void main(final String[] args) throws Exception {
 
         //Configuracion y acceso inicial a la base de datos
         Configuration conf = new Configuration().configure();
         acceso = new Acceso(conf);
         Session session = acceso.getSession("MainTest");
+
         ComprobarTablas(session);       //De esta forma comprobamos la conexion y la creacion de tablas mediante consola
 
         //INSERTAR:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -43,19 +40,22 @@ public class MainTest {
         autoInsertPrestamos();
 
         //ELIMINAR:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        DBControl.Eliminar.libroPorId(1);
-        DBControl.Eliminar.socioPorId(1);
-        DBControl.Eliminar.PrestamosPorId(1);
+        //DBControl.Eliminar.libroPorId(1);
+        //DBControl.Eliminar.socioPorId(1);
+        //DBControl.Eliminar.PrestamosPorId(1);
 
         //CONSULTAS SIMPLES::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         //Libros.................................................................................
-        List<Object> consulta1 = DBControl.Consultar.querySimple("Libros", "titulo", "tit2");
+        System.out.println("flag1");
+        List<Libros> consulta1 = DBControl.Consultar.queryLibros("0", "7", "0", "0", "0");
+        System.out.println(consulta1.size()+" Resultados");
         for (int i = 0; i < consulta1.size(); i++) {
-            Libros libro = (Libros)consulta1.get(i);
+            Libros libro = consulta1.get(i);
+
             System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
         }
-
-        List<Object> consulta2 = DBControl.Consultar.querySimple("Socios", "edad", "58");
+/*
+        List<Object> consulta2 = DBControl.Consultar.querySimple("Socios", "edad", " ");
         for (int i = 0; i < consulta2.size(); i++) {
             Socios socio = (Socios)consulta2.get(i);
             System.out.println("\t"+socio.getNombre()+" "+socio.getApellido()+" ("+socio.getEdad()+") con tlfn: "+socio.getTelefono());
@@ -129,7 +129,6 @@ public class MainTest {
                     , Integer.toString(rnd.nextInt(800))
                     , "199"+Integer.toString(rnd.nextInt(10)));
             DBControl.Insertar.nuevoLibro(libro);
-
         }
     }
 

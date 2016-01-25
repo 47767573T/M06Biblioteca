@@ -86,4 +86,12 @@ public class Prestamo implements Serializable{
     public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
+
+    // METODOS GENERALES
+
+    @Override
+    public String toString() {
+        return id+" - libro:"+ idLibro.getId()+" prestado a socio "+idSocio.getId()
+                +"\n Prestamos realizado el "+fechaIni+" a devolver el "+fechaFin;
+    }
 }

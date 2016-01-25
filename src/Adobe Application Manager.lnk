@@ -17,8 +17,8 @@ Prestamos
 	
 Consultas
 	Libros
-		Prestados
-		Prestados a socio determinado
+		_Prestados
+		_Prestados a socio determinado
 		Que han superado la fecha de prestamos
 		_Por título
 		_Por editorial

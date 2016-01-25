@@ -20,6 +20,9 @@ import java.util.Random;
  */
 public class Insertar{
 
+    public static String ano_mes_dia = "yyyy/MM/dd";
+    static SimpleDateFormat formatoBasicoFecha = new SimpleDateFormat(ano_mes_dia);
+
     public static void nuevoLibro(Libros libro){
 
         Session session = Acceso.getSession("Insertar_nuevoLibro");
@@ -45,5 +48,25 @@ public class Insertar{
 
         session.save(prestamo);
         session.getTransaction().commit();
+    }
+
+    public static void crearPrestamo (int idLibro, int idSocio){
+
+        int plazoDevolucion = 10;
+
+        Calendar calendar = Calendar.getInstance();
+        Date diaPrestamo = calendar.getTime();
+        String fechaPrestamo = formatoBasicoFecha.format(diaPrestamo);
+        calendar.add(GregorianCalendar.DAY_OF_YEAR,plazoDevolucion);
+        Date diaDevolucion = calendar.getTime();
+        String fechaDevolucion = formatoBasicoFecha.format(diaDevolucion);
+
+        Prestamo prestamo = new Prestamo(
+                DBControl.Consultar.LibroPorId(idLibro)
+                , DBControl.Consultar.SocioPorId(idSocio)
+                , fechaPrestamo
+                , fechaDevolucion);
+
+        nuevoPrestamo(prestamo);
     }
 }

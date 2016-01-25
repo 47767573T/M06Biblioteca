@@ -93,4 +93,13 @@ public class Libros implements Serializable{
     public void setAnoEdicion(String anoEdicion) {
         this.anoEdicion = anoEdicion;
     }
+
+    // METODOS GENERALES
+
+
+    @Override
+    public String toString() {
+        return id+" - "+titulo+ " de "+paginas+"pags. "
+                +"\n Ed. "+editorial+" fueron editadas "+unidades+" en "+anoEdicion ;
+    }
 }

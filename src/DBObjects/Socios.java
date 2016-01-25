@@ -89,4 +89,13 @@ public class Socios implements Serializable{
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+
+    // METODOS GENERALES
+
+    @Override
+    public String toString() {
+        return id+" - "+nombre+ " "+apellido+" de "+edad+" años "
+                +"\n vive en "+direccion+" con tlfn. "+telefono;
+    }
 }

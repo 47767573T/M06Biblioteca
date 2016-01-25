@@ -1,10 +1,12 @@
 package DBControl;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.mapping.Map;
+import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
@@ -43,6 +45,27 @@ public class Acceso {
     public static Session getSession(String callClass) throws HibernateException {
         System.out.println("peticion de acceso desde "+callClass);
         return sessionFactory.openSession();
+    }
+
+    public static void ComprobarTablas (Session session){
+        try {
+            System.out.println("buscando las entidades...");
+            final java.util.Map metadataMap = session.getSessionFactory().getAllClassMetadata();
+            for (Object key : metadataMap.keySet()) {
+                final ClassMetadata classMetadata = (ClassMetadata) metadataMap.get(key);
+                final String entityName = classMetadata.getEntityName();
+                final Query query = session.createQuery("from " + entityName);
+                System.out.println("\tencontrada" +
+                        ": " + query.getQueryString());
+                for (Object o : query.list()) {
+                    System.out.println("  " + o);
+                }
+            }
+            System.out.println("...entidades encontradas en Base de datos");
+        } catch (ExceptionInInitializerError ex) {
+            System.out.println("Error en Main_ComprobarTablas"+ ex);
+            session.close();
+        }
     }
 
     public static void Apagar() {sessionFactory.close();}
