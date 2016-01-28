@@ -18,11 +18,9 @@ import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
 
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by Moises on 19/01/2016.
@@ -256,6 +254,8 @@ public class ControlInterfaz implements Initializable{
                 ,validarCampoVacio(txfTelefono.getText()));
 
         System.out.println(listPrestamos.get(0).getId());
+
+        if (chbNoDevuelto.isSelected()) listPrestamos = filtrarPrestamoCaducado(listPrestamos);
 
 
         lblResultado.setText("Resultado: "+String.valueOf(listPrestamos.size()));
@@ -493,5 +493,21 @@ public class ControlInterfaz implements Initializable{
         listProperty.set(FXCollections.observableArrayList(lvwRenglones));
         lvwResultado.itemsProperty().bind(listProperty);
 
+    }
+
+    public List<Prestamo> filtrarPrestamoCaducado (List<Prestamo> prestamos) throws ParseException {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat(ano_mes_dia);
+
+        Calendar calendar = Calendar.getInstance();
+        Date fechaActual = calendar.getTime();
+        Date fechaFin;
+
+        for (int i = 0; i < prestamos.size(); i++) {
+            fechaFin = formatoFecha.parse(prestamos.get(i).getFechaFin());
+
+            //Comparamos fechas y si no ha caducado lo borra para quedarnos con los caducados
+            if (fechaFin.after(fechaActual)) prestamos.remove(i);
+        }
+        return prestamos;
     }
 }

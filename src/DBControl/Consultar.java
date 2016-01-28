@@ -173,7 +173,7 @@ public class Consultar {
         boolean inicioDeQuery = true;
 
         Session session = Acceso.getSession("Consultar_queryPrestamos");
-
+        System.out.println(idLibro+"_"+idSocio+"_"+fechaIni+"_"+fechaFin);
         String queryMontada = "from Prestamo where ";
         if (idLibro != 0){
             queryMontada += "(idLibro.id = :idl)";
@@ -200,6 +200,10 @@ public class Consultar {
 
         if (idSocio != 0 && idLibro == 0 && fechaFin.equals("0") && fechaIni.equals("0")){
             queryMontada = "from Prestamo where idSocio.id = :ids";
+        }
+
+        if (idSocio == 0 && idLibro == 0 && fechaFin.equals("0") && fechaIni.equals("0")){
+            queryMontada = "from Prestamo";
         }
 
         Query query = session.createQuery(queryMontada);
