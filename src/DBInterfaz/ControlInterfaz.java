@@ -1,7 +1,6 @@
 package DBInterfaz;
 
 import DBControl.Acceso;
-import DBControl.Consultar;
 import DBObjects.Libros;
 import DBObjects.Prestamo;
 import DBObjects.Socios;
@@ -9,7 +8,6 @@ import javafx.application.Platform;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -39,8 +37,6 @@ public class ControlInterfaz implements Initializable{
     Button btnEliminar= new Button();
     @FXML
     Button btnConsultar= new Button();
-    @FXML
-    Button btnModificar= new Button();
 
     @FXML
     Button btnLibros= new Button();
@@ -50,7 +46,7 @@ public class ControlInterfaz implements Initializable{
     Button btnPrestamos= new Button();
 
     @FXML
-    ListView lvwResultado = new ListView();
+    ListView<String> lvwResultado = new ListView<>();
 
 
     @FXML   //BOTONES RELACIONADOS CON TABLA LIBRO
@@ -101,16 +97,19 @@ public class ControlInterfaz implements Initializable{
     public static Acceso acceso;
 
     public static String ano_mes_dia = "yyyy/MM/dd";
-    static SimpleDateFormat formatoBasicoFecha = new SimpleDateFormat(ano_mes_dia);
 
-    int menuAccion = 0;
-    int menuTabla = 0;
+    static int menuAccion = 0;
+    static int menuTabla = 0;
 
     ListProperty<String> listProperty = new SimpleListProperty<>();
     List <String> lvwRenglones = new ArrayList<>();
 
 
-
+    /**
+     * Metodo Al iniciar la aplicacion
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -140,47 +139,72 @@ public class ControlInterfaz implements Initializable{
         btnPrestamos.setVisible(false);
     }
     //METODOS DE EVENTO DEL MENU PRINCIPAL::::::::::::::::::::::::::::::::::::::::::::::::::
-    public void onIngresar(ActionEvent actionEvent)throws Exception{
-        menuAccion = 10;
+
+    /**
+     * Metodo al ingresar que guarda el boton seleccionado y muestra los menus relacionados
+     * @throws Exception
+     */
+    public void onIngresar()throws Exception{
+        menuAccion=10;
         mostrarMenuTablas();
     }
 
-    public void onEliminar(ActionEvent actionEvent)throws Exception{
-        menuAccion = 20;
+    /**
+     * Metodo al Eliminar que guarda el boton seleccionado y muestra los menus relacionados
+     * @throws Exception
+     */
+    public void onEliminar()throws Exception{
+        menuAccion=20;
         mostrarMenuTablas();
     }
 
-    public void onConsultar(ActionEvent actionEvent)throws Exception{
-        menuAccion = 30;
-        mostrarMenuTablas();
-    }
-
-    public void onModificar(ActionEvent actionEvent)throws Exception{
-        menuAccion = 40;
+    /**
+     * Metodo al consultar que guarda el boton seleccionado y muestra los menus relacionados
+     * @throws Exception
+     */
+    public void onConsultar()throws Exception{
+        menuAccion=30;
         mostrarMenuTablas();
     }
 
 
     //METODOS DE EVENTO DE MENU SECUNDARIO:::::::::::::::::::::::::::::::::::::::::::::
-    public void onActionLibro(ActionEvent actionEvent) throws Exception{
-        menuTabla = 1;
+
+    /**
+     * Metodo al seleccionar menu libro que guarda el boton seleccionado y muestra los menus relacionados
+     * @throws Exception
+     */
+    public void onActionLibro() throws Exception{
+        menuTabla=1;
         mostrarMenuCampos();
         mostrarCampos();
     }
 
-    public void onActionSocio(ActionEvent actionEvent) throws Exception{
-        menuTabla = 2;
+    /**
+     * Metodo al seleccionar menu Socio que guarda el boton seleccionado y muestra los menus relacionados
+     * @throws Exception
+     */
+    public void onActionSocio() throws Exception{
+        menuTabla=2;
         mostrarMenuCampos();
         mostrarCampos();
     }
 
-    public void onActionPrestamo(ActionEvent actionEvent) throws Exception{
-        menuTabla = 3;
+    /**
+     * Metodo al seleccionar menu Prestamo que guarda el boton seleccionado y muestra los menus relacionados
+     * @throws Exception
+     */
+    public void onActionPrestamo() throws Exception{
+        menuTabla=3;
         mostrarMenuCampos();
         mostrarCampos();
     }
 
-    public void onBusqueda(ActionEvent actionEvent) throws Exception{
+    /**
+     * Metodo que distribuye el metodo a utilizar segun las opciones escogidas
+     * @throws Exception
+     */
+    public void onBusqueda() throws Exception{
         switch (menuTabla+menuAccion){
             case 11:
                 ingresarLibro();
@@ -211,31 +235,41 @@ public class ControlInterfaz implements Initializable{
         }
     }
 
+    /**
+     * Selecciona libro(s) segun especificaciones de los campos y lo muestra por la aplicacion
+     */
     public void consultarLibros(){
         List<Libros> listLibros = DBControl.Consultar.queryLibros(
-                validarCampoVacio(txfTitulo.getText())
-                ,validarCampoVacio(txfEditorial.getText())
-                ,validarCampoVacio(txfAnoEdicion.getText())
-                ,validarCampoVacio(txfPaginas.getText())
-                ,validarCampoVacio(txfUnidades.getText()));
+                validarCampoVacioStr(txfTitulo.getText())
+                ,validarCampoVacioStr(txfEditorial.getText())
+                ,validarCampoVacioStr(txfAnoEdicion.getText())
+                ,validarCampoVacioStr(txfPaginas.getText())
+                ,validarCampoVacioStr(txfUnidades.getText()));
 
         lblResultado.setText("Resultado: "+String.valueOf(listLibros.size()));
         montarListadoLibro(listLibros);
     }
 
+    /**
+     * Selecciona Socio(s) segun especificaciones de los campos y lo muestra por la aplicacion
+     */
     public void consultarSocios(){
         List<Socios> listSocios = DBControl.Consultar.querySocios(
-                validarCampoVacio(txfNombre.getText())
-                ,validarCampoVacio(txfApellido.getText())
-                ,validarCampoVacio(txfDireccion.getText())
-                ,validarCampoVacio(txfTelefono.getText()));
+                validarCampoVacioStr(txfNombre.getText())
+                ,validarCampoVacioStr(txfApellido.getText())
+                ,validarCampoVacioStr(txfDireccion.getText())
+                ,validarCampoVacioStr(txfTelefono.getText())
+                ,validarCampoVacioStr(txfEdad.getText()));
 
         lblResultado.setText("Resultado: "+String.valueOf(listSocios.size()));
         montarListadoSocio(listSocios);
     }
 
-
-    public void consultarPrestamos(){
+    /**
+     * Selecciona prestamo(s) segun especificaciones de los campos y lo muestra por la aplicacion
+     * @throws ParseException
+     */
+    public void consultarPrestamos() throws ParseException {
         int idLibro;
         int idSocio;
 
@@ -243,15 +277,15 @@ public class ControlInterfaz implements Initializable{
             idLibro = 0;
         } else idLibro = Integer.parseInt(txfIdLibroPrestamo.getText());
 
-        if (txfIdLibroPrestamo.getText().equals("")){
+        if (txfIdSocioPrestamo.getText().equals("")){
             idSocio = 0;
-        } else idSocio = Integer.parseInt(txfIdLibroPrestamo.getText());
+        } else idSocio = Integer.parseInt(txfIdSocioPrestamo.getText());
 
         List<Prestamo> listPrestamos = DBControl.Consultar.queryPrestamos(
                 validarCampoVacioInt(idLibro)
                 ,validarCampoVacioInt(idSocio)
-                ,validarCampoVacio(txfDireccion.getText())
-                ,validarCampoVacio(txfTelefono.getText()));
+                ,validarCampoVacioStr(txfDireccion.getText())
+                ,validarCampoVacioStr(txfTelefono.getText()));
 
         System.out.println(listPrestamos.get(0).getId());
 
@@ -262,6 +296,9 @@ public class ControlInterfaz implements Initializable{
         montarListadoPrestamo(listPrestamos);
     }
 
+    /**
+     * Elimina el registro libro de la base de datos según especificaciones de usuario y muestra el numero de registros afectados
+     */
     public void eliminarLibro(){
         int resultado = 0;
         int id = Integer.parseInt(txfIdLibros.getText());
@@ -272,6 +309,9 @@ public class ControlInterfaz implements Initializable{
         lblResultado.setText("Resultado: "+resultado);
     }
 
+    /**
+     * Elimina el registro socio de la base de datos según especificaciones de usuario y muestra el numero de registros afectados
+     */
     public void eliminarSocio(){
         int resultado = 0;
         int id = Integer.parseInt(txfIdSocios.getText());
@@ -282,6 +322,9 @@ public class ControlInterfaz implements Initializable{
         lblResultado.setText("Resultado: "+resultado);
     }
 
+    /**
+     * Elimina el registro prestamo de la base de datos según especificaciones de usuario y muestra el numero de registros afectados
+     */
     public void eliminarPrestamo(){
         int resultado = 0;
         int id = Integer.parseInt(txfIdPrestamos.getText());
@@ -292,6 +335,9 @@ public class ControlInterfaz implements Initializable{
         lblResultado.setText("Resultado: "+resultado);
     }
 
+    /**
+     * Ingresa un libro en la base de datos según especificaciones de usuario y muestra el numero de registros afectados
+     */
     public void ingresarLibro (){
 
         Libros libro = new Libros(
@@ -304,6 +350,9 @@ public class ControlInterfaz implements Initializable{
         lblResultado.setText("Resultado: 1");
     }
 
+    /**
+     * Ingresa un Socio en la base de datos según especificaciones de usuario y muestra el numero de registros afectados
+     */
     public void ingresarSocio (){
 
         Socios socio = new Socios(
@@ -316,6 +365,9 @@ public class ControlInterfaz implements Initializable{
         lblResultado.setText("Resultado: 1");
     }
 
+    /**
+     * Ingresa un prestamo en la base de datos según especificaciones de usuario y muestra el numero de registros afectados
+     */
     public void ingresarPrestamo (){
         DBControl.Insertar.crearPrestamo(
                 Integer.parseInt(txfIdLibroPrestamo.getText())
@@ -323,137 +375,39 @@ public class ControlInterfaz implements Initializable{
         lblResultado.setText("Resultado: 1");
     }
 
+    /**
+     * Cierra el programa
+     */
     public void onSalir(){
-        //acceso.Apagar(); //Cerramos el sessionFactory al cerrar la aplicacion
         Platform.exit();
     }
 
-    //METODOS UTILES::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    public void mostrarMenuTablas(){
-        btnLibros.setVisible(true);
-        btnSocios.setVisible(true);
-        btnPrestamos.setVisible(true);
-    }
-
-    public void mostrarMenuCampos(){
-
-        switch (menuTabla) {
-            case 1:
-                anpLibros.setVisible(true);
-                anpPrestamos.setVisible(false);
-                anpSocios.setVisible(false);
-                break;
-            case 2:
-                anpLibros.setVisible(false);
-                anpSocios.setVisible(true);
-                anpPrestamos.setVisible(false);
-                break;
-            case 3:
-                anpLibros.setVisible(false);
-                anpSocios.setVisible(false);
-                anpPrestamos.setVisible(true);
-                break;
-        }
-    }
-
-    public void mostrarCampos(){
-
-        switch (menuTabla+menuAccion) {
-            case 11:
-                txfIdLibros.setVisible(false);
-                txfAnoEdicion.setVisible(true);
-                txfEditorial.setVisible(true);
-                txfTitulo.setVisible(true);
-                txfPaginas.setVisible(true);
-                txfUnidades.setVisible(true);
-                break;
-
-            case 12:
-                txfIdSocios.setVisible(false);
-                txfNombre.setVisible(true);
-                txfApellido.setVisible(true);
-                txfEdad.setVisible(true);
-                txfDireccion.setVisible(true);
-                txfTelefono.setVisible(true);
-                break;
-
-            case 13:
-                txfIdPrestamos.setVisible(false);
-                txfIdLibroPrestamo.setVisible(true);
-                txfIdSocioPrestamo.setVisible(true);
-                chbNoDevuelto.setVisible(false);
-                txfFechaFinal.setVisible(false);
-                txfFechaInicial.setVisible(false);
-                break;
-
-            case 21:
-                txfIdLibros.setVisible(true);
-                txfAnoEdicion.setVisible(false);
-                txfEditorial.setVisible(false);
-                txfTitulo.setVisible(false);
-                txfPaginas.setVisible(false);
-                txfUnidades.setVisible(false);
-                break;
-
-            case 22:
-                txfIdSocios.setVisible(true);
-                txfNombre.setVisible(false);
-                txfApellido.setVisible(false);
-                txfEdad.setVisible(false);
-                txfDireccion.setVisible(false);
-                txfTelefono.setVisible(false);
-                break;
-
-            case 23:
-                txfIdPrestamos.setVisible(true);
-                txfIdLibroPrestamo.setVisible(false);
-                txfIdSocioPrestamo.setVisible(false);
-                chbNoDevuelto.setVisible(false);
-                txfFechaFinal.setVisible(false);
-                txfFechaInicial.setVisible(false);
-                break;
-
-            case 31:
-                txfIdLibros.setVisible(false);
-                txfAnoEdicion.setVisible(true);
-                txfEditorial.setVisible(true);
-                txfTitulo.setVisible(true);
-                txfPaginas.setVisible(true);
-                txfUnidades.setVisible(true);
-                break;
-
-            case 32:
-                txfIdSocios.setVisible(false);
-                txfNombre.setVisible(true);
-                txfApellido.setVisible(true);
-                txfEdad.setVisible(true);
-                txfDireccion.setVisible(true);
-                txfTelefono.setVisible(true);
-                break;
-
-            case 33:
-                txfIdPrestamos.setVisible(false);
-                txfIdLibroPrestamo.setVisible(true);
-                txfIdSocioPrestamo.setVisible(true);
-                chbNoDevuelto.setVisible(true);
-                txfFechaFinal.setVisible(true);
-                txfFechaInicial.setVisible(true);
-                break;
-        }
-    }
-
-    public String validarCampoVacio (String resultado){
+    /**
+     * Prepara los campos del tipo String si estan vacios dandole valores por defecto para querys
+     * @param resultado El valor del campo a validar
+     * @return si está vacío da el valor 0 por defecto sino no lo cambia
+     */
+    public String validarCampoVacioStr (String resultado){
         if (resultado.equals("")) resultado = "0";
 
         return resultado;
     }
 
+    /**
+     * Prepara los campos del tipo Integer si estan vacios dandole valores por defecto para querys
+     * @param resultado El valor del campo a validar
+     * @return si está vacío da el valor 0 por defecto sino no lo cambia
+     */
     public int validarCampoVacioInt (int resultado){
         if (resultado == 0) resultado = 0;
 
         return resultado;
     }
 
+    /**
+     * Controla lo que se muestra por listado tras seleccionar las opciones relacionadas con Libros
+     * @param listado Listado a mostrar rellenado segun especificaciones de usuario
+     */
     public void montarListadoLibro (List<Libros> listado){
         lvwRenglones.clear();
 
@@ -465,6 +419,10 @@ public class ControlInterfaz implements Initializable{
         lvwResultado.itemsProperty().bind(listProperty);
     }
 
+    /**
+     * Controla lo que se muestra por listado tras seleccionar las opciones relacionadas con Socios
+     * @param listado Listado a mostrar rellenado segun especificaciones de usuario
+     */
     public void montarListadoSocio (List<Socios> listado){
         lvwRenglones.clear();
 
@@ -476,6 +434,11 @@ public class ControlInterfaz implements Initializable{
         lvwResultado.itemsProperty().bind(listProperty);
     }
 
+
+    /**
+     * Controla lo que se muestra por listado tras seleccionar las opciones relacionadas con Prestamos
+     * @param listado Listado a mostrar rellenado segun especificaciones de usuario
+     */
     public void montarListadoPrestamo (List<Prestamo> listado){
         lvwRenglones.clear();
 
@@ -487,6 +450,9 @@ public class ControlInterfaz implements Initializable{
         lvwResultado.itemsProperty().bind(listProperty);
     }
 
+    /**
+     * Vacia y muestra el list cuando el resultado de una consulta es 0
+     */
     public void vaciarListado (){
         lvwRenglones.clear();
 
@@ -495,6 +461,12 @@ public class ControlInterfaz implements Initializable{
 
     }
 
+    /**
+     * Filtra el listado de prestamos segun si han caducado
+     * @param prestamos Listado de prestamos segun especificaciones del usuario
+     * @return El listado filtrado
+     * @throws ParseException
+     */
     public List<Prestamo> filtrarPrestamoCaducado (List<Prestamo> prestamos) throws ParseException {
         SimpleDateFormat formatoFecha = new SimpleDateFormat(ano_mes_dia);
 
@@ -504,10 +476,132 @@ public class ControlInterfaz implements Initializable{
 
         for (int i = 0; i < prestamos.size(); i++) {
             fechaFin = formatoFecha.parse(prestamos.get(i).getFechaFin());
-
+            System.out.println(fechaActual.compareTo(fechaFin));
             //Comparamos fechas y si no ha caducado lo borra para quedarnos con los caducados
             if (fechaFin.after(fechaActual)) prestamos.remove(i);
         }
         return prestamos;
+    }
+
+    /**
+     * Este método controla que campos mostrará la aplicación según selección del usuario
+     */
+    public void mostrarCampos(){
+
+        switch (menuTabla+menuAccion) {
+            case 11:                        //Ingresar libros
+                txfIdLibros.setVisible(false);
+                txfAnoEdicion.setVisible(true);
+                txfEditorial.setVisible(true);
+                txfTitulo.setVisible(true);
+                txfPaginas.setVisible(true);
+                txfUnidades.setVisible(true);
+                break;
+
+            case 12:                        //Ingresar socios
+                txfIdSocios.setVisible(false);
+                txfNombre.setVisible(true);
+                txfApellido.setVisible(true);
+                txfEdad.setVisible(true);
+                txfDireccion.setVisible(true);
+                txfTelefono.setVisible(true);
+                break;
+
+            case 13:                        //Ingresar prestamos
+                txfIdPrestamos.setVisible(false);
+                txfIdLibroPrestamo.setVisible(true);
+                txfIdSocioPrestamo.setVisible(true);
+                chbNoDevuelto.setVisible(false);
+                txfFechaFinal.setVisible(false);
+                txfFechaInicial.setVisible(false);
+                break;
+
+            case 21:                        //Eliminar libros
+                txfIdLibros.setVisible(true);
+                txfAnoEdicion.setVisible(false);
+                txfEditorial.setVisible(false);
+                txfTitulo.setVisible(false);
+                txfPaginas.setVisible(false);
+                txfUnidades.setVisible(false);
+                break;
+
+            case 22:                        //Eliminar socios
+                txfIdSocios.setVisible(true);
+                txfNombre.setVisible(false);
+                txfApellido.setVisible(false);
+                txfEdad.setVisible(false);
+                txfDireccion.setVisible(false);
+                txfTelefono.setVisible(false);
+                break;
+
+            case 23:                        //Eliminar prestamos
+                txfIdPrestamos.setVisible(true);
+                txfIdLibroPrestamo.setVisible(false);
+                txfIdSocioPrestamo.setVisible(false);
+                chbNoDevuelto.setVisible(false);
+                txfFechaFinal.setVisible(false);
+                txfFechaInicial.setVisible(false);
+                break;
+
+            case 31:                        //Consultar libros
+                txfIdLibros.setVisible(false);
+                txfAnoEdicion.setVisible(true);
+                txfEditorial.setVisible(true);
+                txfTitulo.setVisible(true);
+                txfPaginas.setVisible(true);
+                txfUnidades.setVisible(true);
+                break;
+
+            case 32:                        //Consultar socios
+                txfIdSocios.setVisible(false);
+                txfNombre.setVisible(true);
+                txfApellido.setVisible(true);
+                txfEdad.setVisible(true);
+                txfDireccion.setVisible(true);
+                txfTelefono.setVisible(true);
+                break;
+
+            case 33:                        //Consultar prestamos
+                txfIdPrestamos.setVisible(false);
+                txfIdLibroPrestamo.setVisible(true);
+                txfIdSocioPrestamo.setVisible(true);
+                chbNoDevuelto.setVisible(true);
+                txfFechaFinal.setVisible(true);
+                txfFechaInicial.setVisible(true);
+                break;
+        }
+    }
+
+    /**
+     * Controla que opciones de tabla se muestran
+     */
+    public void mostrarMenuTablas(){
+        btnLibros.setVisible(true);
+        btnSocios.setVisible(true);
+        btnPrestamos.setVisible(true);
+    }
+
+    /**
+     * Controla que opciones muestra segun tabla
+     */
+    public void mostrarMenuCampos(){
+
+        switch (menuTabla) {
+            case 1:                         //Libros
+                anpLibros.setVisible(true);
+                anpPrestamos.setVisible(false);
+                anpSocios.setVisible(false);
+                break;
+            case 2:                         //Socios
+                anpLibros.setVisible(false);
+                anpSocios.setVisible(true);
+                anpPrestamos.setVisible(false);
+                break;
+            case 3:                         //Prestamos
+                anpLibros.setVisible(false);
+                anpSocios.setVisible(false);
+                anpPrestamos.setVisible(true);
+                break;
+        }
     }
 }

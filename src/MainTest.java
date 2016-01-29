@@ -54,33 +54,6 @@ public class MainTest {
 
             System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
         }
-/*
-        List<Object> consulta2 = DBControl.Consultar.querySimple("Socios", "edad", " ");
-        for (int i = 0; i < consulta2.size(); i++) {
-            Socios socio = (Socios)consulta2.get(i);
-            System.out.println("\t"+socio.getNombre()+" "+socio.getApellido()+" ("+socio.getEdad()+") con tlfn: "+socio.getTelefono());
-        }
-
-        List<Object> consulta3 = DBControl.Consultar.querySimple("Prestamo", "idlibro_id", "1");
-        for (int i = 0; i < consulta3.size(); i++) {
-            Prestamo prestamo = (Prestamo)consulta3.get(i);
-            System.out.println("\t("+prestamo.getFechaFin()+" - "+prestamo.getFechaIni()+") de ID="+prestamo.getId());
-        }
-
-        //MODIFICAR
-        DBControl.Modificar.querySimple("Libros", "anoedicion", "1999", "anoedicion", "2001");
-        DBControl.Modificar.querySimple("Socios", "direccion", "direccion4", "apellido", "apellido4");
-        DBControl.Modificar.querySimple("Prestamo", "idsocio_id", "1", "idlibro_id", "2");
-
-        acceso.Apagar(); //Cerramos el sessionFactory al cerrar la aplicacion
-
-        //CONSULTA MULTIPLES:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-       /* List<Object> consultaMulti1 = DBControl.Consultar.queryCompleja("Libros", "titulo", "tit2");
-        for (int i = 0; i < consultaMulti1.size(); i++) {
-            Libros libro = (Libros)consultaMulti1.get(i);
-            System.out.println("\t"+libro.getTitulo()+" ("+libro.getEditorial()+") - edicion del "+libro.getAnoEdicion());
-        }
-*/
     }
 
     public static void ComprobarTablas (Session session){

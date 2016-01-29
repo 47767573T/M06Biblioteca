@@ -7,7 +7,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,12 +22,8 @@ public class Consultar {
         session.beginTransaction();
         Query query = session.createQuery("from Libros where id = "+id);
 
-        if (query.list().isEmpty()) {
-            Libros libro = new Libros(0);
-            return libro;
-        }
-        else { Libros libro = (Libros) query.list().get(0);
-            return libro;
+        if (query.list().isEmpty()) { return new Libros(0); }
+        else { return (Libros) query.list().get(0);
         }
     }
 
@@ -38,12 +33,8 @@ public class Consultar {
         session.beginTransaction();
         Query query = session.createQuery("from Socios where id = "+id);
 
-        if (query.list().isEmpty()) {
-            Socios socio = new Socios(0);
-            return socio;
-        }
-        else { Socios socio = (Socios) query.list().get(0);
-            return socio;
+        if (query.list().isEmpty()) { return new Socios(0); }
+        else { return (Socios) query.list().get(0);
         }
     }
 
@@ -53,13 +44,8 @@ public class Consultar {
         session.beginTransaction();
         Query query = session.createQuery("from Prestamo where id = "+id);
 
-        if (query.list().isEmpty()) {
-            Prestamo prestamo = new Prestamo(0);
-            return prestamo;
-        }
-        else { Prestamo prestamo = (Prestamo) query.list().get(0);
-            return prestamo;
-        }
+        if (query.list().isEmpty()) { return new Prestamo(0); }
+        else { return (Prestamo) query.list().get(0); }
     }
 
     public static List<Libros> queryLibros (String titulo, String editorial, String anoedicion, String pag
@@ -120,7 +106,7 @@ public class Consultar {
         return query.list();
     }
 
-    public static List<Socios> querySocios (String nombre, String apellido, String direccion, String telefono){
+    public static List<Socios> querySocios (String nombre, String apellido, String direccion, String telefono, String edad){
 
         boolean inicioDeQuery = true;
 
@@ -150,17 +136,25 @@ public class Consultar {
             inicioDeQuery = false;
         }
 
-        if (nombre.equals("0") && apellido.equals("0") && direccion.equals("0") && telefono.equals("0")){
+        if (!edad.equals("0") && !inicioDeQuery)queryMontada += " AND (edad = :ed)";
+        else if (!edad.equals("0") && inicioDeQuery){
+            queryMontada += " (edad = :ed)";
+            inicioDeQuery = false;
+        }
+
+        if (nombre.equals("0") && apellido.equals("0") && direccion.equals("0")
+                && telefono.equals("0") && edad.equals("0")){
             queryMontada = "from Socios";
         }
 
         System.out.println(queryMontada);
         Query query = session.createQuery(queryMontada);
 
-        if (!nombre.equals("0")) query.setParameter("tit", nombre);
+        if (!nombre.equals("0")) query.setParameter("nom", nombre);
         if (!apellido.equals("0")) query.setParameter("cognom",apellido);
-        if (!direccion.equals("0"))query.setParameter("dir",apellido);
+        if (!direccion.equals("0"))query.setParameter("dir",direccion);
         if (!telefono.equals("0"))query.setParameter("tlfn",telefono);
+        if (!edad.equals("0"))query.setParameter("ed",edad);
 
         System.out.println(queryMontada);
         query.list();

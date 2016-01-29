@@ -87,8 +87,8 @@ public class Prestamo implements Serializable{
         this.fechaFin = fechaFin;
     }
 
-    // METODOS GENERALES
 
+    // METODOS GENERALES
     @Override
     public String toString() {
         return id+" - libro:"+ idLibro.getId()+" prestado a socio "+idSocio.getId()

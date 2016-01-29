@@ -92,7 +92,6 @@ public class Socios implements Serializable{
 
 
     // METODOS GENERALES
-
     @Override
     public String toString() {
         return id+" - "+nombre+ " "+apellido+" de "+edad+" años "

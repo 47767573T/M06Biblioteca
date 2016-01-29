@@ -94,9 +94,9 @@ public class Libros implements Serializable{
         this.anoEdicion = anoEdicion;
     }
 
+
+
     // METODOS GENERALES
-
-
     @Override
     public String toString() {
         return id+" - "+titulo+ " de "+paginas+"pags. "

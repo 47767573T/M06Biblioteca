@@ -4,16 +4,11 @@ package DBControl;
 import DBObjects.Libros;
 import DBObjects.Prestamo;
 import DBObjects.Socios;
-import org.hibernate.Query;
 import org.hibernate.Session;
-import sun.tools.jar.Main;
-
-import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Random;
 
 /**
  * Created by Moises on 17/01/2016.
